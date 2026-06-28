@@ -4,20 +4,15 @@
 # Brought to you by rio004 
 #
 
-# Date/Time
 SECONDS=0
+DEVICE="agate"
 DATE=$(date '+%Y%m%d-%H%M')
-
-# Device
-DEVICE="${1:-agate}"
-DEFCONFIG="${DEVICE}_defconfig"
 ZIPNAME="HydrogenKernel-${DEVICE}-${DATE}.zip"
-
-echo -e "Building for: $DEVICE\n"
+TC_DIR="$HOME/toolchains/neutron-clang"
+DEFCONFIG="${DEVICE}_defconfig"
+CURRENT_DIR=$(pwd)
 
 # Ensure the toolchain is available
-TC_DIR="$HOME/toolchains/neutron-clang"
-CURRENT_DIR=$(pwd)
 if [ ! -d "$TC_DIR" ]; then
     mkdir -p $TC_DIR
     cd $TC_DIR
