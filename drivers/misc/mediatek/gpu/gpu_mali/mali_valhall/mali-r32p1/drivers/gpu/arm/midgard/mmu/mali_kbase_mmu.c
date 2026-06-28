@@ -998,7 +998,7 @@ page_fault_retry:
 						>> lp_mem_pool->order;
 
 				ret = kbase_mem_pool_grow(lp_mem_pool,
-					pages_to_grow, kctx->task);
+					pages_to_grow);
 			} else {
 #endif
 				struct kbase_mem_pool *const mem_pool =
@@ -1006,7 +1006,7 @@ page_fault_retry:
 					region->gpu_alloc->group_id];
 
 				ret = kbase_mem_pool_grow(mem_pool,
-					pages_to_grow, kctx->task);
+					pages_to_grow);
 #ifdef CONFIG_MALI_2MB_ALLOC
 			}
 #endif
@@ -1378,7 +1378,7 @@ int kbase_mmu_insert_single_page(struct kbase_context *kctx, u64 vpfn,
 				&kbdev->mem_pools.small[
 #endif
 					kctx->mmu.group_id],
-				MIDGARD_MMU_BOTTOMLEVEL, kctx->task);
+				MIDGARD_MMU_BOTTOMLEVEL);
 			mutex_lock(&kctx->mmu.mmu_lock);
 		} while (!err);
 		if (err) {
@@ -1531,7 +1531,7 @@ int kbase_mmu_insert_pages_no_flush(struct kbase_device *kbdev,
 #else
 				&kbdev->mem_pools.small[mmut->group_id],
 #endif
-				cur_level, NULL);
+				cur_level);
 			mutex_lock(&mmut->mmu_lock);
 		} while (!err);
 
@@ -2109,7 +2109,7 @@ static int kbase_mmu_update_pages_no_flush(struct kbase_context *kctx, u64 vpfn,
 				&kbdev->mem_pools.small[
 #endif
 					kctx->mmu.group_id],
-				MIDGARD_MMU_BOTTOMLEVEL, kctx ? kctx->task : NULL);
+				MIDGARD_MMU_BOTTOMLEVEL);
 			mutex_lock(&kctx->mmu.mmu_lock);
 		} while (!err);
 		if (err) {
@@ -2246,7 +2246,7 @@ int kbase_mmu_init(struct kbase_device *const kbdev,
 #else
 			&kbdev->mem_pools.small[mmut->group_id],
 #endif
-			MIDGARD_MMU_BOTTOMLEVEL, mmut->kctx ? mmut->kctx->task : NULL);
+			MIDGARD_MMU_BOTTOMLEVEL);
 		if (err) {
 			kbase_mmu_term(kbdev, mmut);
 			return -ENOMEM;
