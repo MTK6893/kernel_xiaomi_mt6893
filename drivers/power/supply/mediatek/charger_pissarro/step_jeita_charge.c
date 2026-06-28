@@ -18,7 +18,6 @@
 #include <linux/slab.h>
 #include <linux/gpio.h>
 #include <linux/of_gpio.h>
-#include <linux/platform_device.h>
 
 #include <linux/power_supply.h>
 #include "mtk_charger_intf.h"
