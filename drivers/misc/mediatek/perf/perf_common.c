@@ -59,7 +59,7 @@ void perf_tracker(u64 wallclock)
 
 }
 
-#if defined(CONFIG_MTK_PERF_TRACKER) || defined(CONFIG_MTK_CORE_CTL)
+#ifdef CONFIG_MTK_PERF_TRACKER
 bool hit_long_check(void)
 {
 	bool do_check = false;
