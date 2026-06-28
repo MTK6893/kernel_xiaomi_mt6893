@@ -15,7 +15,6 @@
 #ifndef __DEBUG_DRIVER_H__
 #define __DEBUG_DRIVER_H__
 
-#include <linux/device.h>
 #include "apusys_device.h"
 
 #define DEBUG
