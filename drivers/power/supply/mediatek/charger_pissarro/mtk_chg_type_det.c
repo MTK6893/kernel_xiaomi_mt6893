@@ -514,6 +514,7 @@ static int mt_usb_get_property(struct power_supply *psy,
 		if (mtk_chg->chg_type != CHARGER_UNKNOWN)
 			val->intval = 1;
 		break;
+#ifdef CONFIG_FACTORY_BUILD
 	case POWER_SUPPLY_PROP_CP_VBUS:
 		if (info && info->chg1_dev)
 			charger_dev_get_vbus(info->chg1_dev, &val->intval);
@@ -532,6 +533,7 @@ static int mt_usb_get_property(struct power_supply *psy,
 		else
 			val->intval = 0;
 		break;
+#endif
 	default:
 		return -EINVAL;
 	}
@@ -614,9 +616,11 @@ static enum power_supply_property mt_usb_properties[] = {
 	POWER_SUPPLY_PROP_JEITA_CHG_INDEX,
 	POWER_SUPPLY_PROP_CV_WA_COUNT,
 	POWER_SUPPLY_PROP_PRESENT,
+#ifdef CONFIG_FACTORY_BUILD
 	POWER_SUPPLY_PROP_CP_VBUS,
 	POWER_SUPPLY_PROP_CP_IBUS_MASTER,
 	POWER_SUPPLY_PROP_CP_IBUS_SLAVE,
+#endif
 };
 
 static void tcpc_power_off_work_handler(struct work_struct *work)
